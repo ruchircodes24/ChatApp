@@ -1,70 +1,64 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import {auth} from '../firebase'
+import {useAuthState} from 'react-firebase-hooks/auth'
+import { GoogleAuthProvider, signInWithRedirect } from 'firebase/auth'
 import googleIcon from '../assets/icons/google.png'
+import Logo from '../assets/icons/Logo.png'
 import { useState } from 'react'
 
-const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
-]
+// const navigation = [
+//     { name: 'Dashboard', href: '#', current: true },
+//     { name: 'Team', href: '#', current: false },
+//     { name: 'Projects', href: '#', current: false },
+//     { name: 'Calendar', href: '#', current: false },
+// ]
+
+const title = {name: 'Chatchit', href: '#', current:true} 
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar() {
-    const [user, setUser] = useState(false)
-    const signIn = () => setUser(false)
-    const signOut = () => setUser(true)
+export default function NavBar() {
+    const [user] = useAuthState(auth)
+    const signIn = () => {
+        const provider = new GoogleAuthProvider()
+        signInWithRedirect(auth, provider)
+    }
+    const signOut = () => auth.signOut()
     return (
         <Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                         <div className="relative flex h-16 items-center justify-between">
-                            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                                {/* Mobile menu button*/}
-                                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                                    <span className="absolute -inset-0.5" />
-                                    <span className="sr-only">Open main menu</span>
-                                    {open ? (
-                                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                                    ) : (
-                                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                                    )}
-                                </Disclosure.Button>
-                            </div>
-                            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                                <div className="flex flex-shrink-0 items-center">
+                            
+                            <div className="flex flex-1 items-center justify-left sm:items-stretch sm:justify-start">
+                                <div className="flex flex-shrink-0 items-center pl-3">
                                     <img
                                         className="h-8 w-auto"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                        src={Logo}
                                         alt="Your Company"
                                     />
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
-                                        {navigation.map((item) => (
                                             <a
-                                                key={item.name}
-                                                href={item.href}
+                                                key={title.name}
+                                                href={title.href}
                                                 className={classNames(
-                                                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                    title.current ?'text-white text-2xl' : 'text-gray-300',
                                                     'rounded-md px-3 py-2 text-sm font-medium'
                                                 )}
-                                                aria-current={item.current ? 'page' : undefined}
+                                                aria-current={title.current ? 'page' : undefined}
                                             >
-                                                {item.name}
+                                                {title.name}
                                             </a>
-                                        ))}
                                     </div>
                                 </div>
                             </div>
-
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                                {user ? (<button
+                                {!user ? (<button
                                     type="button"
                                     className="flex items-center gap-2 relative rounded-full bg-gray-600 p-2 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 signIn"
                                     onClick={signIn}
@@ -85,20 +79,19 @@ export default function Navbar() {
 
                     <Disclosure.Panel className="sm:hidden">
                         <div className="space-y-1 px-2 pb-3 pt-2">
-                            {navigation.map((item) => (
                                 <Disclosure.Button
-                                    key={item.name}
+                                    key={title.name}
                                     as="a"
-                                    href={item.href}
+                                    href={title.href}
                                     className={classNames(
-                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                        title.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                         'block rounded-md px-3 py-2 text-base font-medium'
                                     )}
-                                    aria-current={item.current ? 'page' : undefined}
+                                    aria-current={title.current ? 'page' : undefined}
                                 >
-                                    {item.name}
+                                    {title.name}
                                 </Disclosure.Button>
-                            ))}
+                            
                         </div>
                     </Disclosure.Panel>
                 </>
