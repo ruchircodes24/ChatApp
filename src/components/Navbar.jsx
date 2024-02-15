@@ -30,7 +30,7 @@ export default function NavBar() {
         <Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
                 <>
-                    <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                    <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 z-5">
                         <div className="relative flex h-16 items-center justify-between">
                             
                             <div className="flex flex-1 items-center justify-left sm:items-stretch sm:justify-start">
@@ -38,17 +38,17 @@ export default function NavBar() {
                                     <img
                                         className="h-8 w-auto"
                                         src={Logo}
-                                        alt="Your Company"
+                                        alt="Logo"
                                     />
                                 </div>
                                 <div className="hidden sm:ml-6 sm:block">
-                                    <div className="flex space-x-4">
+                                    <div className="flex space-x-4 font-kanit">
                                             <a
                                                 key={title.name}
                                                 href={title.href}
                                                 className={classNames(
-                                                    title.current ?'text-white text-2xl' : 'text-gray-300',
-                                                    'rounded-md px-3 py-2 text-sm font-medium'
+                                                    title.current ?'text-white text-xl' : 'text-gray-300',
+                                                    'rounded-md text-sm font-medium'
                                                 )}
                                                 aria-current={title.current ? 'page' : undefined}
                                             >
