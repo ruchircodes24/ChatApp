@@ -12,8 +12,11 @@ function App() {
   
   return (
     <>
+    <div className='flex flex-col h-screen'>
       <NavBar />
       {user ? <ChatBox /> : <Welcome />}
+    </div>
+      
     </>
   )
 }
