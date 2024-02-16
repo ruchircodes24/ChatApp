@@ -13,7 +13,7 @@ import { useState } from 'react'
 //     { name: 'Calendar', href: '#', current: false },
 // ]
 
-const title = {name: 'Chatchit', href: '#', current:true} 
+const title = {name: 'ChatChit', href: '#', current:true} 
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -27,7 +27,7 @@ export default function NavBar() {
     }
     const signOut = () => auth.signOut()
     return (
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-black border-b-2 border-purple-500">
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 z-5">
@@ -36,7 +36,7 @@ export default function NavBar() {
                             <div className="flex flex-1 items-center justify-left sm:items-stretch sm:justify-start">
                                 <div className="flex flex-shrink-0 items-center pl-3">
                                     <img
-                                        className="h-8 w-auto"
+                                        className="h-10 w-auto"
                                         src={Logo}
                                         alt="Logo"
                                     />
@@ -47,7 +47,7 @@ export default function NavBar() {
                                                 key={title.name}
                                                 href={title.href}
                                                 className={classNames(
-                                                    title.current ?'text-white text-xl' : 'text-gray-300',
+                                                    title.current ?'text-white text-2xl' : 'text-gray-300',
                                                     'rounded-md text-sm font-medium'
                                                 )}
                                                 aria-current={title.current ? 'page' : undefined}
@@ -60,11 +60,11 @@ export default function NavBar() {
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                 {!user ? (<button
                                     type="button"
-                                    className="flex items-center gap-2 relative rounded-full bg-gray-600 p-2 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 signIn"
+                                    className="flex items-center gap-2 relative rounded-full  px-3 py-2 text-gray-400 font-semibold hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 signIn"
                                     onClick={signIn}
                                 >
                                     <img src={googleIcon} alt="Sign in with Google" className='w-4' />
-                                    Sign in with Google
+                                    Sign in
                                 </button>) :
                                     (<button
                                         type="button"
