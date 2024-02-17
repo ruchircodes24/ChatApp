@@ -1,6 +1,6 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import {auth} from '../firebase'
-import {useAuthState} from 'react-firebase-hooks/auth'
+import { auth } from '../firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { GoogleAuthProvider, signInWithRedirect } from 'firebase/auth'
 import googleIcon from '../assets/icons/google.png'
 import Logo from '../assets/icons/Logo.png'
@@ -13,7 +13,7 @@ import { useState } from 'react'
 //     { name: 'Calendar', href: '#', current: false },
 // ]
 
-const title = {name: 'ChatChit', href: '#', current:true} 
+const title = { name: 'ChatChit', href: '#', current: true }
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -31,32 +31,30 @@ export default function NavBar() {
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 z-5">
-                        <div className="relative flex h-16 items-center justify-between">
-                            
-                            <div className="flex flex-1 items-center justify-left sm:items-stretch sm:justify-start">
-                                <div className="flex flex-shrink-0 items-center pl-3">
-                                    <img
-                                        className="h-10 w-auto"
-                                        src={Logo}
-                                        alt="Logo"
-                                    />
-                                </div>
-                                <div className="hidden sm:ml-6 sm:block">
-                                    <div className="flex space-x-4 font-kanit">
-                                            <a
-                                                key={title.name}
-                                                href={title.href}
-                                                className={classNames(
-                                                    title.current ?'text-white text-2xl' : 'text-gray-300',
-                                                    'rounded-md text-sm font-medium'
-                                                )}
-                                                aria-current={title.current ? 'page' : undefined}
-                                            >
-                                                {title.name}
-                                            </a>
-                                    </div>
+                        <div className="relative flex h-16 items-center">                         <div className="flex flex-1 items-center justify-left sm:items-stretch sm:justify-start">
+                            <div className="flex flex-shrink-0 items-center">
+                                <img
+                                    className="h-10 w-auto"
+                                    src={Logo}
+                                    alt="Logo"
+                                />
+                            </div>
+                            <div className="hidden sm:ml-6 sm:block ">
+                                <div className="flex font-kanit pt-1">
+                                    <a
+                                        key={title.name}
+                                        href={title.href}
+                                        className={classNames(
+                                            title.current ? 'text-white text-xl' : 'text-gray-300',
+                                            'rounded-md text-sm font-medium'
+                                        )}
+                                        aria-current={title.current ? 'page' : undefined}
+                                    >
+                                        {title.name}
+                                    </a>
                                 </div>
                             </div>
+                        </div>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                                 {!user ? (<button
                                     type="button"
@@ -79,19 +77,19 @@ export default function NavBar() {
 
                     <Disclosure.Panel className="sm:hidden">
                         <div className="space-y-1 px-2 pb-3 pt-2">
-                                <Disclosure.Button
-                                    key={title.name}
-                                    as="a"
-                                    href={title.href}
-                                    className={classNames(
-                                        title.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                        'block rounded-md px-3 py-2 text-base font-medium'
-                                    )}
-                                    aria-current={title.current ? 'page' : undefined}
-                                >
-                                    {title.name}
-                                </Disclosure.Button>
-                            
+                            <Disclosure.Button
+                                key={title.name}
+                                as="a"
+                                href={title.href}
+                                className={classNames(
+                                    title.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                    'block rounded-md px-3 py-2 text-base font-medium'
+                                )}
+                                aria-current={title.current ? 'page' : undefined}
+                            >
+                                {title.name}
+                            </Disclosure.Button>
+
                         </div>
                     </Disclosure.Panel>
                 </>
